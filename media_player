@@ -1,0 +1,177 @@
+package mediaplayerpackage;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class MediaPlayer extends JPanel implements ActionListener {
+	JFrame window = new JFrame("Media Player");
+	JButton addButton = new JButton("Add Music");
+	JButton playButton = new JButton("  Play  ");
+	JButton stopButton = new JButton("    Stop    ");
+	Font customFont = new Font("",Font.ROMAN_BASELINE,20);
+	JComboBox list = new JComboBox();
+	JFileChooser browser = new JFileChooser();
+	FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV Sound","wav");
+	int returnValue;
+	String [] musics = new String[7];
+	int i=0; 
+	File selectedFile;
+	File sound;
+	String filename;
+	AudioInputStream ais;
+	Clip clip;
+	
+	MediaPlayer(){
+		ImageIcon image = new ImageIcon("logo.jpg");
+		window.setIconImage(image.getImage());
+		browser.setFileFilter(filter);
+		window.setSize(400,230);
+		window.setLocation(550,300);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setVisible(true);		
+		window.getContentPane().setBackground(new Color(0x123456));
+		window.add(this);
+		window.setResizable(true);
+		
+		
+		addButton.addActionListener(this);
+		playButton.addActionListener(this);
+		stopButton.addActionListener(this);
+		
+		
+		window.add(list,BorderLayout.PAGE_START);
+		list.setFont(new Font("Arial Narrow",Font.BOLD,20));
+		list.setForeground(Color.WHITE);
+		list.setBackground(new Color(0x123456));
+		list.setFocusable(false);
+
+		
+		window.add(addButton,BorderLayout.LINE_START);
+		addButton.setFont(new Font("Arial Narrow",Font.BOLD,20));
+		addButton.setBackground(new Color(0x123456));
+		addButton.setForeground(Color.WHITE);
+		addButton.setFocusable(false);
+
+		
+		window.add(playButton,BorderLayout.CENTER);
+		playButton.setFont(new Font("Arial Narrow",Font.BOLD,20));
+		playButton.setBackground(new Color(0x123456));
+		playButton.setForeground(Color.WHITE);
+		playButton.setFocusable(false);
+
+		
+		window.add(stopButton,BorderLayout.LINE_END);
+		stopButton.setFont(new Font("Arial Narrow",Font.BOLD,20));
+		stopButton.setBackground(new Color(0x123456));
+		stopButton.setForeground(Color.WHITE);
+		stopButton.setFocusable(false);
+
+	}
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource()==addButton) {
+			returnValue = browser.showOpenDialog(window);
+			
+			if(returnValue==browser.APPROVE_OPTION) {
+				selectedFile = browser.getSelectedFile();
+				filename = browser.getSelectedFile().getName();
+				musics[i] = selectedFile.toString();
+				i++;
+				list.addItem(filename);
+				
+			}
+		}
+		else if(ae.getSource()==playButton) {
+			try{
+				if(list.getSelectedIndex()==0) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==1) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==2) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==3) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==4) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==5) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==6) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+				else if(list.getSelectedIndex()==7) {
+					sound = new File(musics[list.getSelectedIndex()]);
+					ais = AudioSystem.getAudioInputStream(sound);
+					clip = AudioSystem.getClip();
+					clip.open(ais);
+					clip.start();
+				}
+
+
+
+
+
+				
+			}catch(Exception e) {JOptionPane.showMessageDialog(null, e);}
+			 
+		}
+		
+		else if(ae.getSource()==stopButton) {
+			clip.stop();
+		}
+		
+
+
+		
+	}
+
+}
